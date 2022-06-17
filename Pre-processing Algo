@@ -1,0 +1,25 @@
+
+
+<Resize the training images to a standard size like 224x224>
+<create same number of masks as number of images, size 28x28> 
+
+Previous_patient_ID = Blanks
+Start loop
+   mask[i] = np.zeros(image_size) # to create a blank mask
+   Read train_labels next row 	
+   if (Previous_patient_ID == current_Patient_ID)  # means another patch in the same xray
+      get dimensions of the bounding box from train_labels row
+      resize the bounding box as per the mask size (refer the computer vision notebook)
+      move the bounding box pixels from the main image to the mask (refer the computer vision notebook)
+
+   else    # new patient row, this could or coudnt have pneumonia	 
+      if target == 1 # pneumonia detected
+         get dimensions of the bounding box from train_labels row
+         resize the bounding box as per the mask size 
+         move the bounding box pixels from the main image to the mask
+         Previous_patient_ID = current_Patient_ID
+      <end of if statement>
+   <end of if-else>
+<end of loop>
+
+When target = 0, we can keep a blank mask as the output.
